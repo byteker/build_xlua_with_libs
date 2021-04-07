@@ -137,6 +137,12 @@ jobs:
         run: |
           cd build
           .\make_win64_luajit.bat
+      - name: Build Luac
+        run: |
+          cd build
+          cd luac
+          .\make_win64.bat
+          .\make_win32.bat
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
@@ -152,6 +158,16 @@ jobs:
         with:
           path: ./build/plugin_luajit/**/*
           name: plugin_luajit
+      - name: UploadLuacWin32
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./build/luac/build32/Release/**/*
+          name: build32
+      - name: UploadLuacWin64
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./build/luac/build64/Release/**/*
+          name: build64 
     
 
    

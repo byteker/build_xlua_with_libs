@@ -102,6 +102,11 @@ jobs:
           ./make_osx_lua54.sh
           ./make_osx_lua53.sh
           ./make_osx_luajit.sh
+      - name: Build Luac
+        run: |
+          cd build
+          cd luac
+          ./make_unix.sh
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
@@ -117,6 +122,11 @@ jobs:
         with:
           path: ./build/plugin_luajit/**/*
           name: plugin_luajit  
+      - name: UploadLuacUnix
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./build/luac/build_unix/**/*
+          name: build_unix 
   windows:
     runs-on: windows-2016
 

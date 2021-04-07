@@ -106,6 +106,7 @@ jobs:
         run: |
           cd build
           cd luac
+          chmod +x ./make_unix.sh
           ./make_unix.sh
       - name: Upload
         uses: actions/upload-artifact@v2

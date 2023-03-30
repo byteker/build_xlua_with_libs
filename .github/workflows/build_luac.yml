@@ -1,0 +1,36 @@
+
+name: build_luac
+
+on: 
+  push:
+    paths: 
+      - build/**
+      - .github/workflows/build_luac.yml
+
+jobs:
+  windows:
+    runs-on: windows-2016
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Insatll MSVC
+        uses: microsoft/setup-msbuild@v1.0.2
+      
+      - name: Build
+        run: |
+          cd build
+          cd luac
+          .\make_win64_luajit.bat
+          .\make_win32_luajit.bat
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./build/luac/build32/**/*
+          name: build32
+      - name: Upload53
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./build/luac/build64/**/*
+          name: build64   
+    
